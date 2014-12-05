@@ -2,10 +2,10 @@ This code is intended to be loaded as a shared library before libc, probably usi
 the LD_PRELOAD environment variable.  It intercepts calls to open() and redirects
 any that attempt to open any file with the string "ttyUSB" in its name.
 
-The expected use case is on program.elf, which assumes that a serial USB device must
-be a debugging tool intended for its use and immediately hijacks the device, leaving it
-useless for other programs.  As far as I can tell, there is no command-line flag to
-disable this rude behavior.  Hence this hack.
+The expected use case is on the AR Drone 2.0's program.elf, which assumes that a
+serial USB device must be a debugging tool intended for its use and immediately
+hijacks the device, leaving it useless for other programs.  As far as I can tell,
+there is no command-line flag to disable this rude behavior.  Hence this hack.
 
 If you just want to intercept open()s of ttyUSBs, you can use the precompiled inject.so
 library.  Copy it to the quadrotor's /lib directory.  Then, modify the initscript that
