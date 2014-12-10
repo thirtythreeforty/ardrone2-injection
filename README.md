@@ -8,11 +8,16 @@ hijacks the device, leaving it useless for other programs.  As far as I can tell
 there is no command-line flag to disable this rude behavior.  Hence this hack.
 
 If you just want to intercept open()s of ttyUSBs, you can use the precompiled inject.so
-library.  Copy it to the quadrotor's /lib directory.  Then, modify the initscript that
-loads program.elf.  It's somewhere in /etc, although I don't remember exactly where.
+library.  Copy it to the AR.Drone's /lib directory.  Then, modify the script that
+loads program.elf:  /bin/program.elf.respawner.sh.
 Prepend the following to the line that actually invokes program.elf:
 
     LD_PRELOAD=/lib/inject.so
+
+The modified program.elf.respawner.sh script is included if you are uncomfortable with
+modifying it.  I recommend you back up the original script:
+
+cp /bin/program.elf.respawner.sh /bin/program.elf.respawner.sh.orig 
 
 Note: I left the emergency restart command alone, thinking that if the drone needs to be
 in emergency mode, I probably want the flight control firmware to revert to the factory
